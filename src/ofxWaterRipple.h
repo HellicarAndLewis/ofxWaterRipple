@@ -19,10 +19,10 @@ class ofxWaterRipple {
 		void	setup(int w, int h);
 		void	setupGPU();
 		void	reset ();
-		void	update();
+		void	update(ofTexture *_tex);
 		void	loadImage(const char* archivo);
 		void	loadImage(ofPixelsRef img);
-		void	draw(bool bUseShader);
+		ofFbo*	draw();
 		void	disturb(float x, float y, int radio, int profundidad);
 		void	gotaPerimetro(float x, float y, int radio);
 		void	tocaPunto(int x, int y, int profundidad);

@@ -140,10 +140,10 @@ void ofxWaterRipple::gotaPerimetro(float x, float y, int radio)
 }
 
 
-void ofxWaterRipple::draw(bool bUseShader)
+ofFbo* ofxWaterRipple::draw()
 {
 
-	gpuCompute.draw();
+	return gpuCompute.draw();
 
 }
 
@@ -153,11 +153,11 @@ int inline ofxWaterRipple::SquaredDist(int sx, int sy, int dx, int dy)
 }
 
 
-void ofxWaterRipple::update()
+void ofxWaterRipple::update(ofTexture* _tex)
 {
     gpuCompute.paramDamping = pDamping;
 	gpuCompute.loadDataTexture(GpuCompute::ADD, data);
-	gpuCompute.update();
+	gpuCompute.update(_tex);
 	memset(data,0,_width*_height*4*sizeof(float));
 }
 

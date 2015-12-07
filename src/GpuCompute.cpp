@@ -44,20 +44,21 @@ void GpuCompute::init(unsigned width, unsigned height)
 		fbos[i].end();
     }
     drawFbo.allocate(width,height);
-    updateShader.load("update");
-    drawShader.load("draw");
+    updateShader.load("Shaders/update");
+    drawShader.load("Shaders/draw");
 		
-	imagen.loadImage("images/fondo.jpg");
-	imagen.resize(width,height);
-	imagen.update();
-	tex.loadData(imagen.getPixelsRef());
+//	imagen.loadImage("images/fondo.jpg");
+//	imagen.resize(width,height);
+//	imagen.update();
+//	tex.loadData(imagen.getPixelsRef());
 }
     
 
 //-------------------------------------------------------
 //
-void GpuCompute::update()
+void GpuCompute::update(ofTexture* _tex)
 {
+    tex = *_tex;
     fbos[1 - currentReadFbo].begin(false);
     glPushAttrib(GL_ENABLE_BIT);
     glDisable(GL_BLEND);
@@ -84,7 +85,7 @@ void GpuCompute::update()
     
 //-------------------------------------------------------
 //
-void GpuCompute::draw()
+ofFbo* GpuCompute::draw()
 {
 	drawFbo.begin();
 		drawShader.begin();
@@ -98,8 +99,9 @@ void GpuCompute::draw()
 		texturedQuad();
 		drawShader.end();
 	drawFbo.end();
-
-	drawFbo.draw(0,0,width,height);
+    
+    return &drawFbo;
+//	drawFbo.draw(0,0,width,height);
 }
     
 //-------------------------------------------------------
