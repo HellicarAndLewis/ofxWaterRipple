@@ -26,7 +26,8 @@ public:
         
     void init(unsigned width, unsigned height);
     void update(ofTexture* _tex);
-    ofFbo* draw();
+    void draw();
+    ofFbo* getFbo();
         
     void loadDataTexture(unsigned idx, float* data,
                             unsigned x = 0, unsigned y = 0, unsigned width = 0, unsigned height = 0);

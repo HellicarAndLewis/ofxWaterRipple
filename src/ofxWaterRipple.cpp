@@ -140,11 +140,15 @@ void ofxWaterRipple::gotaPerimetro(float x, float y, int radio)
 }
 
 
-ofFbo* ofxWaterRipple::draw()
+void ofxWaterRipple::draw()
 {
 
-	return gpuCompute.draw();
+    gpuCompute.draw();
 
+}
+
+ofFbo* ofxWaterRipple::getFbo() {
+    return gpuCompute.getFbo();
 }
 
 int inline ofxWaterRipple::SquaredDist(int sx, int sy, int dx, int dy)

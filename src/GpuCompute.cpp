@@ -85,7 +85,7 @@ void GpuCompute::update(ofTexture* _tex)
     
 //-------------------------------------------------------
 //
-ofFbo* GpuCompute::draw()
+void GpuCompute::draw()
 {
 	drawFbo.begin();
 		drawShader.begin();
@@ -100,9 +100,29 @@ ofFbo* GpuCompute::draw()
 		drawShader.end();
 	drawFbo.end();
     
-    return &drawFbo;
-//	drawFbo.draw(0,0,width,height);
+    drawFbo.draw(0,0,width,height);
 }
+
+//-------------------------------------------------------
+//
+
+ofFbo* GpuCompute::getFbo() {
+    drawFbo.begin();
+        drawShader.begin();
+            setUniforms(drawShader);
+    
+            ofVec2f r(width, height);
+            drawShader.setUniform2fv("resolution", r.getPtr());
+            drawShader.setUniformTexture("tex", tex,2);
+            drawShader.setUniform1f("damping",20);
+    
+            texturedQuad();
+        drawShader.end();
+    drawFbo.end();
+    
+    return &drawFbo;
+}
+
     
 //-------------------------------------------------------
 //

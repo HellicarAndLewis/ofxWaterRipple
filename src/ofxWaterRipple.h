@@ -22,7 +22,8 @@ class ofxWaterRipple {
 		void	update(ofTexture *_tex);
 		void	loadImage(const char* archivo);
 		void	loadImage(ofPixelsRef img);
-		ofFbo*	draw();
+		void	draw();
+        ofFbo*  getFbo();
 		void	disturb(float x, float y, int radio, int profundidad);
 		void	gotaPerimetro(float x, float y, int radio);
 		void	tocaPunto(int x, int y, int profundidad);
